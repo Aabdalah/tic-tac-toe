@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-
+import Game from './components/Game'
 function App() {
+
+  const[choice,setChoice] = useState(["o", null])
+
+  function handleClickXOrO(value){
+      const nextChoice = choice.slice();
+      if(value === choice[0]){
+          return
+      }
+      nextChoice[0] = value;
+      setChoice(nextChoice)
+  }
+
+  function handleClickPCOrHumane(value){
+      const nextChoice = choice.slice();
+      if(value === choice[1]){
+          return
+      }
+      nextChoice[1] = value;
+      setChoice(nextChoice)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Game handleClickXOrO = {handleClickXOrO} handleClickPCOrHumane = {handleClickPCOrHumane} choice={choice}/>
   );
 }
 
