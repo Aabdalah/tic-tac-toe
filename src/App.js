@@ -4,7 +4,7 @@ import Game from './components/Game'
 function App() {
 
   const[choice,setChoice] = useState(["o", null])
-
+  const [xIsNext,setXIsNext] = useState(true);
   function handleClickXOrO(value){
       const nextChoice = choice.slice();
       if(value === choice[0]){
@@ -21,10 +21,13 @@ function App() {
       }
       nextChoice[1] = value;
       setChoice(nextChoice)
+      if(choice[0] === "o" && value ==="pc"){
+        setXIsNext(false)
+      }
   }
 
   return (
-    <Game handleClickXOrO = {handleClickXOrO} handleClickPCOrHumane = {handleClickPCOrHumane} choice={choice}/>
+    <Game handleClickXOrO = {handleClickXOrO} handleClickPCOrHumane = {handleClickPCOrHumane} choice={choice} xIsNext={xIsNext} setXIsNext={setXIsNext}/>
   );
 }
 

@@ -5,17 +5,19 @@ import x from "../assits/icon-x-grey.svg"
 import o from "../assits/icon-o-grey.svg"
 import restart from "../assits/icon-restart.svg"
 
-export default function Board({classes, choice}){
+export default function Board({classes, choice, xIsNext, setXIsNext}){
     const [squares,setSquares] = useState(Array(9).fill(null));
-    const [xIsNext,setXIsNext] = useState(true);
+
     const [score,setScore] = useState(Array(3).fill(0))
 
     if(choice[0] === "o" && isEmpty(squares) && choice[1] === "pc"){
         pcPlay("x",squares)
     }
 
+    let winner = calcWinner(squares);//calculate if there is a winner to prevent the user from playing again
+
     function handleClick(i){
-        const winner = calcWinner(squares);//calculate if there is a winner to prevent the user from playing again
+        winner = calcWinner(squares);//calculate if there is a winner to prevent the user from playing again
         if(squares[i] || winner){return;}
         const nextSquares = squares.slice();//make a copy for immutablity
         if(choice[1] === "pc"){//the user choose to play against pc
@@ -53,7 +55,11 @@ export default function Board({classes, choice}){
 
     function handleNewGame(){
         setSquares(Array(9).fill(null));
-        setXIsNext(true);
+        if(choice[0] === "o" && choice[1] ==="pc"){
+            setXIsNext(false)
+        }else{
+            setXIsNext(true);
+        }
     }
 
     function isEmpty(array){
@@ -85,8 +91,8 @@ export default function Board({classes, choice}){
         <div className = "header">
             <img src = {logo} alt="logo"></img>
             <div className="turn">
-                <img src={xIsNext ? x : o} alt="whose next"></img>
-                <p>TURN</p>
+                <img src={xIsNext && !winner ? x : !xIsNext && !winner ? o : null} alt="" className={winner ? "hidden" : null}></img>
+                <p>{winner === "x" ? "Winner is X" : winner === "o" ? "Winnner is O" : winner === "tie" ? "IT IS A TIE" : "TURN"}</p>
             </div>
             <div className="restart" onClick={handleNewGame}>
                 <img src={restart} alt="restart"></img>

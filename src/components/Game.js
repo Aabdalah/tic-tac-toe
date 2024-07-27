@@ -2,7 +2,8 @@
 import Welcome from "./Welcome";
 import Board from './Board';
 
-export default function Game({handleClickXOrO, handleClickPCOrHumane, choice}){
+export default function Game({handleClickXOrO, handleClickPCOrHumane, choice, xIsNext ,setXIsNext}){
+
     // const[choice,setChoice] = useState(["o", null])
 
     // function handleClickXOrO(value){
@@ -26,7 +27,7 @@ export default function Game({handleClickXOrO, handleClickPCOrHumane, choice}){
     return(
         <>
         <Welcome handleClickXOrO={handleClickXOrO} handleClickPCOrHumane={handleClickPCOrHumane} classes = {choice[1] ? `welcome hidden` : "welcome"}/>
-        <Board classes = {choice[1] ? `board` : "board hidden"} choice={choice}/>
+        <Board classes = {choice[1] ? `board` : "board hidden"} choice={choice} xIsNext = {xIsNext} setXIsNext = {setXIsNext}/>
         </>
     )
 }
