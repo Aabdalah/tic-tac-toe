@@ -46,7 +46,9 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 10px;
 }
+
 .welcome>img{
   margin-bottom: 35px;
 }
@@ -81,6 +83,7 @@ body{
   border-radius: 8px;
   transition: background-color 0.3s;
 }
+
 label:hover{
   background-color: #1f3641;
 }
@@ -135,23 +138,32 @@ label:hover{
 .pick-type button:last-of-type:hover{
   background-color: #47cfcb
 }
-.hidden{
-  display: none;
-}
 /*welcome page section end*/
 /*board page section start*/
 /*board page header  start*/
 .board{
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+}
+@media (max-width:476px) {
+  #root{
+    width: calc(100% - 10px);
+  }
+  .welcome,.pick-player,.pick-player label {
+    width: 100%;
+  }
 }
 .board .header{
+  width: 295px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .board .header img[alt="logo"]{
   width:65px;
   height:30px;
-  margin-right: 25px;
 }
 .board .header .turn{
   width:90px;
@@ -165,7 +177,8 @@ label:hover{
   font-size: 13px;
   font-weight: 700;
   box-shadow: 0 5px 0 0 #111c22;
-  margin-right: 65px;
+  position: relative;
+  left: -10px;
 }
 .board .header .turn img{
   width: 15px;
@@ -213,7 +226,7 @@ label:hover{
 .score{
   margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
 }
 .score>*{
   width: 85px;
@@ -238,3 +251,6 @@ label:hover{
 }
 /*board page score row  end*/
 /*board page section end*/
+.hidden{
+  display: none;
+}
